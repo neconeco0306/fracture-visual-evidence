@@ -4,8 +4,13 @@
 
 > Two screenshots → compare → annotate → share a clear report. No account, no screenshot upload to a server.
 
-**Live demo (deployed build):** https://fracture-visual-evidence.vercel.app/  
-**Color inspector:** https://fracture-visual-evidence.vercel.app/contrast.html
+**Live demo (GitHub Pages):** https://neconeco0306.github.io/fracture-visual-evidence/  
+**Color inspector:** https://neconeco0306.github.io/fracture-visual-evidence/contrast.html  
+**Previous Vercel preview:** https://fracture-visual-evidence.vercel.app/ (may serve an older build)
+
+## 日本語
+
+2枚のスクリーンショットをSPLIT / OVERLAY / DIFFで比較し、気になる箇所に番号付きの注釈を付けて、PNGレポートやJSONとして保存できます。別ページのCONTRASTでは文字色と背景色のコントラストを調べられます。画像はサーバーにアップロードされません。
 
 ## What it does
 
@@ -27,7 +32,7 @@
 - Exports are created on your device; check for personal or confidential information **before you share them**.
 - Two images must have the same dimensions for the raw pixel-diff statistic to be meaningful.
 - The app does not automatically determine whether a bug was fixed.
-- Browser support and mobile export behavior can vary. The live demo may be an earlier deployment than the latest source commit.
+- Browser support and mobile export behavior can vary. Chromium mobile-emulation tests passed, but native iPhone Safari export is not yet independently verified.
 
 ## Run locally
 
@@ -45,16 +50,16 @@ If you have Node.js 20+:
 npm test
 ```
 
-The tests cover deterministic pixel/color calculations and static wiring. Passing them does not prove successful end-to-end export or mobile compatibility.
+The Node suite covers deterministic pixel/color calculations and static wiring. Additional Playwright tests validate synthetic image comparison, pin notes, and downloaded PNG/JSON files in mobile-size Chromium, both against a local HTTP server and the public GitHub Pages site. See the [successful browser QA run](https://github.com/neconeco0306/fracture-visual-evidence/actions/runs/38611610221). This is not a native Safari certification.
 
 ## Technical notes
 
 - Vanilla HTML/CSS/JavaScript with ES modules; no backend or build framework.
 - Browser Canvas API for inspection and export.
-- Strict content security policy configured via `vercel.json`.
+- Content security policy configured through `vercel.json` on Vercel and through HTML CSP meta tags on GitHub Pages. These mechanisms are not identical.
 - Designed to make human-reviewable evidence, **not to replace human review**.
 
-Built as a small AI-assisted software experiment. The original prototype was manually exercised on an iPhone; automated CI and all export paths are not yet verified.
+Built as a small AI-assisted software experiment. The original prototype was manually exercised on an iPhone. GitHub Actions static/Node checks pass; local and hosted Chromium mobile tests pass (2 each). Actual iOS Safari export and clipboard behavior remain a separate manual verification task.
 
 **License:** A source license has not yet been selected. Viewing public source is not the same as granting reuse rights.
 
@@ -66,6 +71,6 @@ The idea of restraint and layered marks was inspired by the design discussion ar
 
 **Source:** https://github.com/neconeco0306/fracture-visual-evidence
 
-**Current status:** Prototype. The previously deployed website was manually exercised on an iPhone, but the current public source commit, exports on every device, and automatic deployment have not yet been certified. The live Vercel version might lag this source release.
+**Current status:** Public prototype. GitHub Pages deployed successfully from `gh-pages`; the real hosted comparison and contrast routes passed browser-based flow/export checks. These checks use emulated mobile Chromium rather than physical Safari. The older Vercel deployment may lag behind.
 
-**Copyright/reuse:** No source license has been granted yet. Public visibility is not permission to reuse this source.
+
