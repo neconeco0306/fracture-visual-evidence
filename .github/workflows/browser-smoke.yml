@@ -34,6 +34,16 @@ jobs:
         run: |
           set -o pipefail
           npx playwright test tests/browser-smoke.spec.mjs --reporter=line --workers=1 2>&1 | tee /tmp/fracture-browser-qa.log
+      - name: Check the actual public GitHub Pages website
+        env:
+          TEST_BASE_URL: https://neconeco0306.github.io/fracture-visual-evidence
+        shell: bash
+        run: |
+          curl -fsSL --retry 5 --retry-delay 3 "$TEST_BASE_URL/" -o /tmp/fracture-public-index.html
+          grep -Fq 'neconeco0306.github.io/fracture-visual-evidence/' /tmp/fracture-public-index.html
+          curl -fsSL --retry 5 --retry-delay 3 "$TEST_BASE_URL/contrast.html" -o /tmp/fracture-public-contrast.html
+          grep -Fq 'CAN YOU' /tmp/fracture-public-contrast.html
+          npx playwright test tests/browser-smoke.spec.mjs --reporter=line --workers=1
       - name: Report synthetic test failure to tracked issue
         if: failure()
         env:
