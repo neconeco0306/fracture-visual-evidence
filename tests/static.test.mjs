@@ -31,7 +31,13 @@ test("No backend requests or third-party UI imports",()=>{
   assert.doesNotMatch(app,/\bfetch\s*\(|XMLHttpRequest|sendBeacon/);
   assert.doesNotMatch(contrast,/\bfetch\s*\(|XMLHttpRequest|sendBeacon/);
   // Absolute URLs in Open Graph metadata are allowed; remote executable assets are not.
-  assert.doesNotMatch(html,/<script[^>]*src=["\x27]https?:|<link[^>]*href=["\x27]https?:/i);
+  assert.doesNotMatch(html,/<script[^>]*src=["\x27]https?:/i);
+  assert.doesNotMatch(html,/<link[^>]*rel=["\x27]stylesheet["\x27][^>]*href=["\x27]https?:/i);
+  // Canonical and Open Graph references are metadata, not executable imports.
+  assert.ok(html.includes('rel="canonical"'));
+  assert.ok(contrastHtml.includes('rel="canonical"'));
+  assert.ok(html.includes('http-equiv="Content-Security-Policy"'));
+  assert.ok(contrastHtml.includes('http-equiv="Content-Security-Policy"'));
   assert.ok(css.length>5000);
 });
 
