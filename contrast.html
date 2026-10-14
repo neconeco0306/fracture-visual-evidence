@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eae7db">
+<meta name="description" content="Sample the foreground and background in any screenshot. Calculate W3C WCAG 2.2 text contrast, export the evidence locally.">
+<meta property="og:title" content="FRACTURE / CONTRAST — Can you actually read this?">
+<title>FRACTURE / CONTRAST — Sample the invisible</title>
+<link rel="stylesheet" href="./styles.css"><link rel="stylesheet" href="./contrast.css">
+<script type="module" src="./contrast.js"></script>
+</head>
+<body>
+<a class="skip" href="#contrastTool">Skip to inspection</a>
+<div class="topline"><span>FRACTURE / FIELD INSTRUMENT 002</span><span class="tiny">LOCAL SCREENSHOT ANALYSIS</span></div>
+<header class="masthead"><a class="brand" href="./" aria-label="FRACTURE home"><span class="brand-mark">F<span class="slash">/</span></span><span>FRACTURE<span class="sup">®</span></span></a><span class="edition">ACCESSIBILITY / COLOR</span><a class="header-link" href="./">BACK TO VISUAL DIFF ↗</a></header>
+<main>
+<section class="contrast-hero"><div class="contrast-intro"><p class="overline">FIELD INSTRUMENT / 002</p><h1>CAN YOU<br><em>READ THIS?</em></h1><p>Contrast is invisible until it isn't. Pick two colors directly from a screenshot and calculate their WCAG contrast ratio. No account, no upload, no guessing about what the pixels mean.</p><a href="#contrastTool" class="primary-link">START INSPECTION ↘</a></div><div class="contrast-art" aria-hidden="true"><div class="sample-dark"><span>GOOD</span><b>14.8:1</b></div><div class="sample-light"><span>FAINT</span><b>1.7:1</b></div><div class="art-cross">+</div></div></section>
+<section class="contrast-tool studio" id="contrastTool">
+<div class="section-head"><div><p class="overline">01 / SAMPLE</p><h2>Bring your screenshot<span class="period">.</span></h2></div><span class="side-note">CLICK TO SELECT / DROP IMAGE<br>OR TRY A SYNTHETIC SAMPLE</span></div>
+<div class="contrast-import"><label class="upload-slot" id="contrastZone" for="contrastInput"><span class="slot-index">SCREENSHOT / OPTIONAL</span><span class="upload-glyph">↥</span><strong id="contrastFilename">Add a screenshot</strong><small>PNG / JPEG / WEBP / AVIF · 18 MB MAX</small><input id="contrastInput" type="file" accept="image/png,image/jpeg,image/webp,image/avif"></label><button id="contrastDemo" class="text-button" type="button">↗ TRY THE SAMPLE</button></div>
+<div class="color-inspection">
+<div class="color-image-panel"><div class="color-bar"><strong>SAMPLE TABLE</strong><span id="contrastImageStatus">NO IMAGE LOADED</span></div><div id="sampleSurface" class="sample-surface" tabindex="0" role="button" aria-label="Sample selected screenshot color; Enter samples center of image"><canvas id="sampleCanvas" width="1000" height="600"></canvas><span id="fgMark" class="sample-marker" hidden>F</span><span id="bgMark" class="sample-marker secondary" hidden>B</span><div id="surfaceEmpty">01 / LOAD AN IMAGE<br>OR ENTER COLORS MANUALLY</div></div><p class="sample-caption">Select foreground first, then background. The crosshair moves with your selected sample. Edges and antialiasing can distort sampled colors.</p></div>
+<div class="contrast-inputs"><div class="pick-header"><span>02 / DEFINE THE PAIR</span><button id="resetPick" type="button" class="text-button">↻ RESET PICKS</button></div>
+<div class="swatch-control"><div class="pick-meta"><label for="foregroundHex">FOREGROUND · TEXT</label><button id="selectFg" type="button" class="picked" aria-pressed="true">SAMPLE F</button></div><div class="swatch-row"><span id="foregroundSwatch" class="color-swatch"></span><input id="foregroundHex" value="#20251F" maxlength="7" spellcheck="false" aria-label="Foreground color hex"></div></div>
+<div class="swatch-control"><div class="pick-meta"><label for="backgroundHex">BACKGROUND · BEHIND TEXT</label><button id="selectBg" type="button" aria-pressed="false">SAMPLE B</button></div><div class="swatch-row"><span id="backgroundSwatch" class="color-swatch"></span><input id="backgroundHex" value="#F4F0E8" maxlength="7" spellcheck="false" aria-label="Background color hex"></div></div>
+<div class="preview-pair"><span>LIVE TEXT SAMPLE</span><div id="previewColor" class="preview-color"><strong>Not everything visible<br>is readable.</strong><span>TEXT ON BACKGROUND · AA / AAA</span></div></div>
+<div class="ratio-view"><span>03 / RESULT</span><strong id="ratioValue">—</strong><span>CONTRAST RATIO</span></div>
+<div class="compliance-grid" aria-live="polite">
+<div><span>AA / NORMAL TEXT</span><strong id="aaNormal">—</strong></div><div><span>AA / LARGE TEXT</span><strong id="aaLarge">—</strong></div><div><span>AAA / NORMAL TEXT</span><strong id="aaaNormal">—</strong></div><div><span>AAA / LARGE TEXT</span><strong id="aaaLarge">—</strong></div>
+</div><p id="colorStatus" role="status" class="color-status">Enter two valid hex colors, or sample both from an image.</p>
+</div></div>
+<div class="contrast-outcome"><div><p class="overline">THE IMPORTANT CAVEAT</p><h2>Numbers are not<br>an <em>audit.</em></h2><p>WCAG 2.2 uses 4.5:1 for ordinary text and 3:1 for large text at AA; 7:1 and 4.5:1 at AAA. But a screenshot can include antialiasing, shadows, transparency, and compression. Two picked pixels cannot certify an entire interface.</p><a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank" rel="noopener noreferrer" class="source-link">READ W3C STANDARD ↗</a></div><div class="contrast-actions"><button type="button" id="copyContrast">↗ COPY THE MEASUREMENT</button><button type="button" id="exportContrast">↓ EXPORT THE INSPECTION CARD</button><p>Exports and clipboard operations happen on your device. Review screenshots before sharing.</p></div></div>
+<p class="toast" id="contrastToast" role="status" aria-live="polite"></p>
+</section>
+</main>
+<footer><div class="footer-brand">F<span>/</span>RACTURE</div><p>COMPARE THE CHANGE. INSPECT THE DETAIL.<br>COLOR SAMPLES ARE OBSERVATIONS — NOT CERTIFICATIONS.</p><a href="./">BACK TO COMPARE ↗</a></footer>
+</body></html>

@@ -1,0 +1,19 @@
+name: Verify FRACTURE
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: node --check app.js && node --check diff-core.mjs && node --check contrast.js && node --check contrast-core.mjs
+      - name: Run pixel and static smoke tests
+        run: npm test

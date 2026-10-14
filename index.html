@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eae7db">
+  <meta name="description" content="Compare two screenshots. Expose the difference. Mark what matters. Export an honest visual report. No sign-up. No upload.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fracture-visual-evidence.vercel.app/">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:title" content="FRACTURE — Make the difference visible">
+  <meta property="og:description" content="A private, local-first visual evidence studio for the before and after.">
+  <title>FRACTURE — Visual Evidence Studio</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#studio">Skip to studio</a>
+  <div class="topline"><span>FRACTURE / VISUAL EVIDENCE STUDIO</span><span class="tiny">IN YOUR BROWSER. ON YOUR TERMS.</span></div>
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="Fracture home"><span class="brand-mark">F<span class="slash">/</span></span><span>FRACTURE<span class="sup">®</span></span></a>
+    <span class="edition">THE COMPARISON ISSUE <b>001</b></span>
+    <a class="header-link" href="./contrast.html">CONTRAST CHECKER <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-side"><span>AN INSTRUMENT FOR<br>THE THINGS WE ALMOST MISS</span><span class="vertical-line"></span><span>01 / OBSERVE</span></div>
+      <div class="hero-main">
+        <div class="eyebrow"><span class="square"></span> A SMALL TOOL FOR A VERY BIG PROBLEM</div>
+        <h1 id="hero-title">THE DIFFERENCE<br>IS <em>THE STORY.</em></h1>
+        <p class="hero-copy">Two screenshots. One truthful comparison.<br>Find the change, pin the problem, ship the evidence.</p>
+        <div class="hero-cta"><a href="#studio" class="primary-link">OPEN THE STUDIO <span aria-hidden="true">↘</span></a><span>NO ACCOUNT. NO API. NO UPLOAD.</span></div>
+      </div>
+      <aside class="hero-stamp" aria-label="Three tools, one workspace"><span class="stamp-big">03</span><span>INSTRUMENTS<br>ONE WORKSPACE</span><div class="seal">COMP<span>ARE</span></div></aside>
+    </section>
+    <div class="ticker" aria-label="Studio features"><div>01 — COMPARE PIXELS <b>↗</b> 02 — ANNOTATE CHANGE <b>↗</b> 03 — EXPORT PROOF <b>↗</b> NO SCREENSHOTS LEAVE THIS DEVICE <b>↗</b></div></div>
+    <section class="studio" id="studio" aria-labelledby="studio-title">
+      <div class="section-head"><div><p class="overline">FIELD LAB / 001</p><h2 id="studio-title">The examination table<span class="period">.</span></h2></div><span class="side-note">DROP TWO IMAGES<br>OR TRY THE DEMO</span></div>
+      <div class="upload-grid">
+        <label class="upload-slot" id="beforeZone" for="beforeInput">
+          <span class="slot-index">A / BEFORE</span><span class="upload-glyph">↥</span>
+          <strong id="beforeLabel">Place the original here</strong><small id="beforeMeta">CLICK OR DROP AN IMAGE · PNG/JPG/WEBP</small>
+          <input type="file" id="beforeInput" accept="image/png,image/jpeg,image/webp,image/avif">
+        </label>
+        <label class="upload-slot" id="afterZone" for="afterInput">
+          <span class="slot-index">B / AFTER</span><span class="upload-glyph">↥</span>
+          <strong id="afterLabel">Place the new version here</strong><small id="afterMeta">CLICK OR DROP AN IMAGE · PNG/JPG/WEBP</small>
+          <input type="file" id="afterInput" accept="image/png,image/jpeg,image/webp,image/avif">
+        </label>
+      </div>
+      <div class="upload-actions"><button id="demoButton" type="button" class="text-button">↗ LOAD THE SAMPLE CASE</button><button id="swapButton" type="button" class="text-button">⇄ REVERSE BEFORE / AFTER</button><span id="privacy" class="privacy-indicator">● IMAGES STAY ON THIS DEVICE</span></div>
+      <div class="workbench">
+        <div class="workbench-bar"><div class="bench-name"><span class="dot"></span><strong>INSPECTION WINDOW</strong><span id="dimensions">AWAITING IMAGES</span></div><div class="view-modes" role="group" aria-label="Comparison mode"><button type="button" data-mode="split" class="active" aria-pressed="true">SPLIT</button><button type="button" data-mode="overlay" aria-pressed="false">OVERLAY</button><button type="button" data-mode="diff" aria-pressed="false">DIFF</button></div></div>
+        <p class="mode-guide" id="modeHelp" role="status">SPLIT: original on the left; updated image on the right. Drag the divider.</p>
+        <div id="visualStage" class="visual-stage" aria-label="Image comparison canvas; click to add annotation when pin mode is on" tabindex="0">
+          <div class="empty-stage" id="emptyStage"><span class="empty-cross">＋</span><span>AN EMPTY FRAME IS STILL AN OBSERVATION.</span><span>ADD TWO IMAGES OR LOAD THE DEMO.</span></div>
+          <div class="image-layer before-layer" id="beforeLayer"><img id="beforeImage" alt="Before screenshot"></div>
+          <div class="image-layer after-layer" id="afterLayer"><img id="afterImage" alt="After screenshot"></div>
+          <canvas id="diffCanvas" class="diff-layer" aria-label="Highlighted difference mask"></canvas>
+          <div class="split-rule" id="splitRule"><span class="split-handle">↔</span></div>
+          <div class="pins-layer" id="pinsLayer" aria-label="Annotation positions"></div>
+          <span class="stage-label before-tag">BEFORE</span><span class="stage-label after-tag">AFTER</span>
+        </div>
+        <div class="bench-controls"><div class="control"><label for="compareRange"><span id="rangeMeaning">REVEAL</span> / <span id="rangeValue">50%</span></label><input id="compareRange" type="range" min="0" max="100" value="50"></div><div class="control"><label for="thresholdRange">PIXEL SENSITIVITY / <span id="thresholdValue">32</span></label><input id="thresholdRange" type="range" min="0" max="255" value="32"><span class="hint">Pixels above this per-channel difference count as changed.</span></div><button class="pin-switch" id="pinMode" type="button" aria-pressed="false">⊕ PLACE PINS <span>OFF</span></button></div>
+        <nav class="studio-shortcuts" aria-label="Next step"><a href="#reportTitle">01 / WRITE A NOTE ↘</a><a href="#export-heading">02 / EXPORT A REPORT ↘</a></nav>
+      </div>
+      <div class="findings" aria-live="polite"><div class="finding"><span class="finding-label">CHANGED PIXELS*</span><strong id="changePercent">—</strong></div><div class="finding"><span class="finding-label">MEASURED AREA</span><strong id="pixelCount">—</strong></div><div class="finding"><span class="finding-label">ANNOTATIONS</span><strong id="pinCount">00</strong></div><div class="finding-message" id="analysisStatus">Load two screenshots to begin the examination.</div></div>
+      <p class="measurement-note">* A pixel is counted as changed when its largest color-channel difference exceeds the sensitivity threshold. No visual or semantic correctness is inferred. Identical image dimensions are required for a pixel comparison.</p>
+      <div class="report-grid">
+        <div class="report-info"><p class="overline">FIELD NOTE / 002</p><h2>Name what<br>you <em>noticed.</em></h2><p>Switch on pins, then tap the image. Every note receives a coordinate and can be exported into a fix brief.</p><label class="field-label" for="reportTitle">REPORT TITLE</label><input id="reportTitle" type="text" maxlength="90" value="A change worth noticing" placeholder="Describe the change"><label class="field-label" for="reportContext">CONTEXT / OPTIONAL</label><textarea id="reportContext" rows="3" maxlength="600" placeholder="Expected behavior, platform, and reproduction steps"></textarea></div>
+        <div class="notes-panel"><div class="notes-head"><span>ANNOTATION LEDGER</span><span id="annotationTotal">00 / NOTES</span></div><div id="notesList" class="notes-list"><p class="empty-notes" id="emptyNotes">No marks yet. Every observation begins somewhere.</p></div></div>
+      </div>
+      <section class="export-section" aria-labelledby="export-heading"><div><p class="overline">FINAL OUTPUT / 003</p><h2 id="export-heading">Make it <em>undeniable.</em></h2><p>Export a high-resolution comparison sheet, an actionable Markdown report, or a portable JSON record. Nothing is posted or uploaded automatically. Check your screenshots for personal information before sharing.</p></div><div class="export-buttons"><button type="button" id="exportPng" class="export-main">↓ EXPORT PNG SHEET</button><button type="button" id="copyReport">↗ COPY FIX BRIEF</button><button type="button" id="exportJson">↓ EXPORT JSON</button></div></section>
+      <section class="contrast-lab" aria-labelledby="contrast-heading">
+        <div class="contrast-intro"><p class="overline">OPTICAL AUDIT / 004</p><h2 id="contrast-heading">The color<br><em>test.</em></h2><p>Two sampled colors. An exact contrast calculation. Not a screenshot-wide accessibility audit.</p><p class="contrast-help">You can edit both colors directly or tap <b>SAMPLE AFTER IMAGE</b>, then select text and background pixels in the inspection window. Sampling antialiased pixels may misrepresent the original CSS colors.</p></div>
+        <div class="contrast-tool">
+          <div class="contrast-tool-head"><span>COLOR PAIR / TEST BENCH</span><span>WCAG 2.2 CONTRAST</span></div>
+          <div class="contrast-pair">
+            <label for="foregroundColor">TEXT COLOR <input id="foregroundColor" type="color" value="#777777"><span id="foregroundCode">#777777</span></label>
+            <label for="backgroundColor">BACKGROUND <input id="backgroundColor" type="color" value="#ffffff"><span id="backgroundCode">#FFFFFF</span></label>
+          </div>
+          <div class="contrast-preview" id="contrastPreview"><span>THE FUTURE IS MADE</span><strong>Visible, not assumed.</strong><small>Readable enough? Test the evidence.</small></div>
+          <div class="contrast-results"><div><span>CONTRAST RATIO</span><strong id="contrastRatio">—</strong></div><div><span>AA NORMAL TEXT</span><strong id="contrastAA">—</strong></div><div><span>AAA NORMAL TEXT</span><strong id="contrastAAA">—</strong></div></div>
+          <div class="contrast-actions"><button type="button" id="contrastPick" aria-pressed="false">⊙ SAMPLE AFTER IMAGE <span>OFF</span></button><button type="button" id="contrastCopy">↗ COPY COLOR REPORT</button></div>
+          <p class="contrast-footnote" id="contrastSource">Calculated from selected sRGB values. Checking text contrast does not certify overall WCAG compliance.</p>
+        </div>
+      </section>
+      <p id="toast" role="status" aria-live="polite" class="toast"></p>
+    </section>
+    <section id="how" class="how"><div class="how-title"><p class="overline">WHY THIS EXISTS</p><h2>Pictures are evidence.<br><em>Not explanations.</em></h2></div><div class="how-steps"><div><span>01</span><strong>SEE</strong><p>Use a split reveal, optical overlay, or raw pixel difference to isolate what moved.</p></div><div><span>02</span><strong>NAME</strong><p>Attach numbered, editable observations to the exact area. Say what should happen.</p></div><div><span>03</span><strong>HAND OFF</strong><p>Turn those observations into a shareable visual sheet or a developer-ready brief.</p></div></div></section>
+  </main>
+  <footer><div class="footer-brand">F<span>/</span>RACTURE</div><p>NOTHING LEAVES YOUR BROWSER UNLESS YOU EXPORT IT.<br>PUBLIC SOURCE RELEASE IN REVIEW · BUILT TO MAKE WORK VISIBLE.</p><a href="#studio">BACK TO THE TABLE ↑</a></footer>
+</body>
+</html>
