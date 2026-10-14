@@ -12,7 +12,7 @@ const base=process.env.TEST_BASE_URL||"http://127.0.0.1:8000";
 
 async function pngIsValid(download,expectedWidth,expectedHeight){
   const bytes=await fs.readFile(await download.path());
-  expect(bytes.subarray(0,8).toString("hex")).toBe("89504e470d0a1a0a";
+  expect(bytes.subarray(0,8).toString("hex")).toBe("89504e470d0a1a0a");
   expect(bytes.readUInt32BE(16)).toBe(expectedWidth);
   expect(bytes.readUInt32BE(20)).toBe(expectedHeight);
 }
