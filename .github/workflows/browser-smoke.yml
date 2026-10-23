@@ -14,7 +14,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '22.23.4'
+      - name: Require patched Node before package downloads
+        run: node -e 'if (process.versions.node !== "22.23.4") process.exit(1)'
       - name: Install Playwright test runner (CI only)
         run: npm install --no-save --package-lock=false --no-audit --no-fund @playwright/test@1.56.1
       - name: Install Chromium browser and system dependencies
