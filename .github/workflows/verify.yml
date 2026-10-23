@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '22.23.4'
       - name: Check JavaScript syntax
         run: node --check app.js && node --check diff-core.mjs && node --check contrast.js && node --check contrast-core.mjs && node --check tests/browser-smoke.spec.mjs
       - name: Run pixel and static smoke tests
